@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Book</title>
+</head>
+<body>
+<div>
+    <h2>{{ book.title }}</h2>
+    <p>a{{ book.description }}</p>
+    <img src="{{ book.image.url }}" alt="">
+    <p>{{ book.created_data }}</p>
+    <p>{{ book.updated_data }}</p>
+</div>
+<div>
+    <h2>Comments: </h2>
+    <ul>
+        {% for i in book_comment.all %}
+        <li>
+            <p> {{ i.text }} </p>
+            <p> {{ i.created_date }} </p>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="/add-comment-book/">Add Comment Book</a>
+</div>
+</body>
+</html>
