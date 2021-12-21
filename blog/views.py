@@ -13,12 +13,22 @@ class PostListView(generic.ListView):
     def get_queryset(self):
         return models.Post.objects.all()
 
+
+
+
 class PostDetailView(generic.DetailView):
     template_name = 'post_detail.html'
 
     def get_object(self, **kwargs):
         post_id = self.kwargs.get('id')
         return get_object_or_404(models.Post, id=post_id)
+
+    def get_context_data(self, **kwargs):
+        context: dict = super(PostDetailView, self).get_context_data(**kwargs)
+        pk = self.kwargs["id"]
+        comments: list[Comment] = models.Comment.objects.filter(post_id=pk)
+        context["comments"] = comments
+        return context
 
 class PostCreateView(generic.CreateView):
     template_name = 'add_post.html'
@@ -100,15 +110,15 @@ class PostDeleteView(generic.DeleteView):
 #
 #     return render(request, 'add_post.html', {'form': form})
 #
-#
-# def add_comment(request):
-#     method = request.method
-#     if method == 'POST':
-#         form = forms.CommentForm(request.POST, request.FILES)
-#         print(form.data)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponse('Comment Created Succssefully')
-#     else:
-#         form = forms.CommentForm()
-#     return render(request, 'add_comment.html', {'form': form})
+
+def add_comment(request):
+    method = request.method
+    if method == 'POST':
+        form = forms.CommentForm(request.POST, request.FILES)
+        print(form.data)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('Comment Created Succssefully')
+    else:
+        form = forms.CommentForm()
+    return render(request, 'add_comment.html', {'form': form})

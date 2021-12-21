@@ -18,7 +18,7 @@
 <div>
     <h2>Comments: </h2>
     <ul>
-        {% for i in post_comment.all %}
+        {% for i in comments %}
         <li>
             <p> {{ i.text }} </p>
             <p> {{ i.created_date }} </p>

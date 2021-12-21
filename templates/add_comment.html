@@ -11,6 +11,7 @@
         <form action="/add-comment/" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
+            <input type="submit" value="Add">
         </form>
     </div>
 </body>
