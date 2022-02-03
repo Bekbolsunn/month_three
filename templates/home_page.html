@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<div>
+    <ul>
+        {% for i in product %}
+        <li>
+            <h2><a href="/{{ i.id }}/">{{ i.name }}</a></h2>
+            <p>{{ i.date_created }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
